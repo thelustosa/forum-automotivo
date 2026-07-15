@@ -22,6 +22,7 @@ body {
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 /* Header Styles */
@@ -638,6 +639,11 @@ body {
   display: flex;
   gap: 2.5rem;
   overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.registry-menu::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .registry-menu-btn {
