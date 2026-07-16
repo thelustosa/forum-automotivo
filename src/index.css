@@ -83,7 +83,6 @@ body {
   height: 2.2rem;
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .header-car-container .car-svg {

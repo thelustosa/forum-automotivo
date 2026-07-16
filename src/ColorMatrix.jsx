@@ -1,4 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import r34White2Raw from './assets/r34_white2.svg?raw';
+import r34RedRaw from './assets/r34_red.svg?raw';
+import r34MNP2Raw from './assets/r34MNP2.svg?raw';
+import r34blackRaw from './assets/r34black.svg?raw';
+import r34amareloRaw from './assets/r34amarelo.svg?raw';
+import r34cinzaRaw from './assets/r34cinza.svg?raw';
+import r34milleniumRaw from './assets/r34millenium.svg?raw';
+import r34azulRaw from './assets/r34azul.svg?raw';
+
+const carSvgs = [r34White2Raw, r34RedRaw, r34MNP2Raw, r34amareloRaw, r34blackRaw, r34cinzaRaw, r34milleniumRaw, r34azulRaw];
 
 const tMatrix = {
   PT: {
@@ -113,16 +123,22 @@ const tMatrix = {
 
 export default function ColorMatrix({ lang = 'PT' }) {
   const t = tMatrix[lang] || tMatrix.PT;
+  const [carIndex, setCarIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarIndex(prev => (prev + 1) % carSvgs.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-8">
       <div className="space-y-12">
         <div>
-          <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-lg font-black tracking-tighter uppercase font-heading">{t.title}</h2>
-              <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-            </div>
+          <div className="mb-8">
+            <h2 className="text-lg font-black tracking-tighter uppercase font-heading">{t.title}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
           </div>
           <div className="border border-border bg-card p-4 overflow-hidden">
             <div className="overflow-x-auto">
@@ -174,8 +190,9 @@ export default function ColorMatrix({ lang = 'PT' }) {
             </div>
           </div>
           <div className="mt-8">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">{t.legend}</h3>
-            <div className="flex flex-wrap gap-3">
+            <div>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">{t.legend}</h3>
+              <div className="flex flex-wrap gap-3">
               <div className="flex items-center gap-1.5"><div className="h-3 w-3 border border-foreground/10" style={{ background: 'rgb(204, 43, 30)' }}></div><span className="font-mono text-[10px] font-medium">AR2</span><span className="text-[10px] text-muted-foreground">{t.colors.AR2}</span></div>
               <div className="flex items-center gap-1.5"><div className="h-3 w-3 border border-foreground/10" style={{ background: 'rgb(245, 208, 0)' }}></div><span className="font-mono text-[10px] font-medium">EV1</span><span className="text-[10px] text-muted-foreground">{t.colors.EV1}</span></div>
               <div className="flex items-center gap-1.5"><div className="h-3 w-3 border border-foreground/10" style={{ background: 'rgb(138, 122, 60)' }}></div><span className="font-mono text-[10px] font-medium">EY0</span><span className="text-[10px] text-muted-foreground">{t.colors.EY0}</span></div>
@@ -190,9 +207,22 @@ export default function ColorMatrix({ lang = 'PT' }) {
               <div className="flex items-center gap-1.5"><div className="h-3 w-3 border border-foreground/10" style={{ background: 'rgb(220, 220, 208)' }}></div><span className="font-mono text-[10px] font-medium">QX1</span><span className="text-[10px] text-muted-foreground">{t.colors.QX1}</span></div>
               <div className="flex items-center gap-1.5"><div className="h-3 w-3 border border-foreground/10" style={{ background: 'rgb(58, 108, 176)' }}></div><span className="font-mono text-[10px] font-medium">TV2</span><span className="text-[10px] text-muted-foreground">{t.colors.TV2}</span></div>
               <div className="flex items-center gap-1.5"><div className="h-3 w-3 border border-foreground/10" style={{ background: 'rgb(192, 192, 184)' }}></div><span className="font-mono text-[10px] font-medium">WV2</span><span className="text-[10px] text-muted-foreground">{t.colors.WV2}</span></div>
+              <div className="header-car-container pointer-events-none ml-auto" style={{ position: 'relative', width: '80px', height: '2.2rem', marginTop: '-0.5rem' }}>
+                {carSvgs.map((svgRaw, idx) => (
+                  <div 
+                    key={idx} 
+                    className="car-svg" 
+                    style={{ opacity: idx === carIndex ? 1 : 0 }}
+                    dangerouslySetInnerHTML={{ __html: svgRaw }} 
+                  />
+                ))}
+              </div>
+            </div>
             </div>
           </div>
-          <p className="mt-6 text-xs text-muted-foreground italic font-mono">{t.totalText}</p>
+          <div className="mt-6">
+            <p className="text-xs text-muted-foreground italic font-mono m-0">{t.totalText}</p>
+          </div>
         </div>
       </div>
     </div>

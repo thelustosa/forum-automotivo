@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.css';
-import r34White2Raw from './assets/r34_white2.svg?raw';
 import jdmSvgRaw from './assets/jdm.svg?raw';
-import r34RedRaw from './assets/r34_red.svg?raw';
-import r34MNP2Raw from './assets/r34MNP2.svg?raw';
-import r34blackRaw from './assets/r34black.svg?raw';
 import ColorMatrix from './ColorMatrix';
 import ChassisRanges from './ChassisRanges';
 import CarCustomizer from './CarCustomizer';
-
-const carSvgs = [r34White2Raw, r34RedRaw, r34MNP2Raw, r34blackRaw];
 
 const tApp = {
   PT: {
@@ -65,14 +59,6 @@ function App() {
   const [currentLang, setCurrentLang] = useState('PT');
   const [showDropdown, setShowDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState('VISÃO GERAL'); // 'VISÃO GERAL', 'CHASSIS'
-  const [carIndex, setCarIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCarIndex(prev => (prev + 1) % carSvgs.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   const t = tApp[currentLang];
 
@@ -89,17 +75,6 @@ function App() {
               <div className="logo-bottom-row">
                 自動車フォーラム
               </div>
-            </a>
-
-            <a href="#" className="header-car-container">
-              {carSvgs.map((svgRaw, idx) => (
-                <div 
-                  key={idx} 
-                  className="car-svg" 
-                  style={{ opacity: idx === carIndex ? 1 : 0 }}
-                  dangerouslySetInnerHTML={{ __html: svgRaw }} 
-                />
-              ))}
             </a>
           </div>
 
