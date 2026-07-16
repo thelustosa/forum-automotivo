@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import r34White2Raw from './assets/r34_white2.svg?raw';
 import jdmSvgRaw from './assets/jdm.svg?raw';
 import r34RedRaw from './assets/r34_red.svg?raw';
+import r34MNP2Raw from './assets/r34MNP2.svg?raw';
+import r34blackRaw from './assets/r34black.svg?raw';
 import ColorMatrix from './ColorMatrix';
 import ChassisRanges from './ChassisRanges';
+import CarCustomizer from './CarCustomizer';
+
+const carSvgs = [r34White2Raw, r34RedRaw, r34MNP2Raw, r34blackRaw];
 
 const tApp = {
   PT: {
@@ -14,7 +19,8 @@ const tApp = {
     chassisReg: "REGISTROS DE CHASSI",
     overview: "VISÃO GERAL",
     chassis: "CHASSIS",
-    heroSub: "Skyline GTR"
+    heroSub: "Skyline GTR",
+    vehicles: "VEÍCULOS"
   },
   EN: {
     totalProd: "TOTAL PRODUCTION",
@@ -23,7 +29,8 @@ const tApp = {
     chassisReg: "CHASSIS RECORDS",
     overview: "OVERVIEW",
     chassis: "CHASSIS",
-    heroSub: "Skyline GT-R"
+    heroSub: "Skyline GT-R",
+    vehicles: "VEHICLES"
   },
   ES: {
     totalProd: "PRODUCCIÓN TOTAL",
@@ -32,7 +39,8 @@ const tApp = {
     chassisReg: "REGISTROS DE CHASIS",
     overview: "VISTA GENERAL",
     chassis: "CHASIS",
-    heroSub: "Skyline GT-R"
+    heroSub: "Skyline GT-R",
+    vehicles: "VEHÍCULOS"
   },
   JA: {
     totalProd: "総生産台数",
@@ -41,7 +49,8 @@ const tApp = {
     chassisReg: "シャシーレコード",
     overview: "概要",
     chassis: "シャシー",
-    heroSub: "スカイライン GT-R"
+    heroSub: "スカイライン GT-R",
+    vehicles: "車両"
   }
 };
 
@@ -56,6 +65,14 @@ function App() {
   const [currentLang, setCurrentLang] = useState('PT');
   const [showDropdown, setShowDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState('VISÃO GERAL'); // 'VISÃO GERAL', 'CHASSIS'
+  const [carIndex, setCarIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarIndex(prev => (prev + 1) % carSvgs.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const t = tApp[currentLang];
 
@@ -75,8 +92,14 @@ function App() {
             </a>
 
             <a href="#" className="header-car-container">
-              <div className="car-svg car-white" dangerouslySetInnerHTML={{ __html: r34White2Raw }} />
-              <div className="car-svg car-red" dangerouslySetInnerHTML={{ __html: r34RedRaw }} />
+              {carSvgs.map((svgRaw, idx) => (
+                <div 
+                  key={idx} 
+                  className="car-svg" 
+                  style={{ opacity: idx === carIndex ? 1 : 0 }}
+                  dangerouslySetInnerHTML={{ __html: svgRaw }} 
+                />
+              ))}
             </a>
           </div>
 
@@ -206,6 +229,12 @@ function App() {
               >
                 {t.chassis}
               </button>
+              <button 
+                className={`registry-menu-btn ${activeTab === 'VEÍCULOS' ? 'active' : ''}`}
+                onClick={() => setActiveTab('VEÍCULOS')}
+              >
+                {t.vehicles}
+              </button>
             </nav>
           </div>
 
@@ -215,6 +244,10 @@ function App() {
 
           {activeTab === 'CHASSIS' && (
             <ChassisRanges lang={currentLang} />
+          )}
+
+          {activeTab === 'VEÍCULOS' && (
+            <CarCustomizer />
           )}
         </div>
       </main>
