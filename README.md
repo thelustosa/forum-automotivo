@@ -13,7 +13,7 @@
 
   <p>
     <a href="https://thelustosa.github.io/forum-automotivo/" target="_blank">
-      <img src="https://img.shields.io/badge/Acessar-GitHub_Pages-brightgreen?style=for-the-badge&logo=github" alt="Acessar Projeto" />
+      <img src="https://img.shields.io/badge/Acessar-Projeto-brightgreen?style=for-the-badge&logo=github" alt="Acessar Projeto" />
     </a>
   </p>
 
@@ -63,4 +63,4 @@ Para rodar ou modificar o projeto em seu ambiente local, siga os passos abaixo:
 ## Deploy Automático (GitHub Pages)
 
 O repositório já está configurado com um workflow do GitHub Actions.
-Qualquer alteração enviada para o ramo principal (main) será detectada, compilada e publicada de forma totalmente automatizada no GitHub Pages do projeto.
+
