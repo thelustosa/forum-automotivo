@@ -34,8 +34,6 @@ public/chassis_thumbs/
 # JSON gerado pelo script (recriado localmente)
 public/cars.json
 
-# Planilha de dados (substituída pelo banco MySQL)
-DADOS.xlsx
 
 # ─── Arquivos sensíveis da API / Banco de Dados ──────────────────────────────
 # Credenciais do banco de dados
