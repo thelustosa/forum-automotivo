@@ -3,7 +3,8 @@ import './index.css';
 import jdmSvgRaw from './assets/jdm.svg?raw';
 import ColorMatrix from './ColorMatrix';
 import ChassisRanges from './ChassisRanges';
-import CarCustomizer from './CarCustomizer';
+import ModelsTab from './ModelsTab';
+import VehiclesGallery from './VehiclesGallery';
 
 const tApp = {
   PT: {
@@ -13,6 +14,7 @@ const tApp = {
     chassisReg: "REGISTROS DE CHASSI",
     overview: "VISÃO GERAL",
     chassis: "CHASSIS",
+    models: "MODELOS",
     heroSub: "Skyline GTR",
     vehicles: "VEÍCULOS"
   },
@@ -23,6 +25,7 @@ const tApp = {
     chassisReg: "CHASSIS RECORDS",
     overview: "OVERVIEW",
     chassis: "CHASSIS",
+    models: "MODELS",
     heroSub: "Skyline GT-R",
     vehicles: "VEHICLES"
   },
@@ -33,6 +36,7 @@ const tApp = {
     chassisReg: "REGISTROS DE CHASIS",
     overview: "VISTA GENERAL",
     chassis: "CHASIS",
+    models: "MODELOS",
     heroSub: "Skyline GT-R",
     vehicles: "VEHÍCULOS"
   },
@@ -43,6 +47,7 @@ const tApp = {
     chassisReg: "シャシーレコード",
     overview: "概要",
     chassis: "シャシー",
+    models: "モデル",
     heroSub: "スカイライン GT-R",
     vehicles: "車両"
   }
@@ -205,6 +210,12 @@ function App() {
                 {t.chassis}
               </button>
               <button 
+                className={`registry-menu-btn ${activeTab === 'MODELOS' ? 'active' : ''}`}
+                onClick={() => setActiveTab('MODELOS')}
+              >
+                {t.models}
+              </button>
+              <button 
                 className={`registry-menu-btn ${activeTab === 'VEÍCULOS' ? 'active' : ''}`}
                 onClick={() => setActiveTab('VEÍCULOS')}
               >
@@ -221,8 +232,12 @@ function App() {
             <ChassisRanges lang={currentLang} />
           )}
 
+          {activeTab === 'MODELOS' && (
+            <ModelsTab lang={currentLang} />
+          )}
+
           {activeTab === 'VEÍCULOS' && (
-            <CarCustomizer />
+            <VehiclesGallery lang={currentLang} />
           )}
         </div>
       </main>

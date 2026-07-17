@@ -9,7 +9,14 @@ const tChassis = {
     variant: "Variante",
     start: "Início",
     end: "Fim",
-    count: "Quantidade"
+    count: "Quantidade",
+    notes: [
+      { id: "BNR34-000001", text: "Primeiro chassi de produção" },
+      { id: "BNR34-007131", text: "Último da primeira fase (07/2000)" },
+      { id: "BNR34-400001", text: "Primeiro da segunda fase (09/2000)" },
+      { id: "BNR34-404495", text: "Último V-Spec II (29/08/02)" },
+      { id: "BNR34-404483", text: "Último M-Spec (28/08/02)" }
+    ]
   },
   EN: {
     title: "CHASSIS NUMBER RANGES",
@@ -19,7 +26,14 @@ const tChassis = {
     variant: "Variant",
     start: "Start",
     end: "End",
-    count: "Count"
+    count: "Count",
+    notes: [
+      { id: "BNR34-000001", text: "First production chassis" },
+      { id: "BNR34-007131", text: "Last early (07/2000)" },
+      { id: "BNR34-400001", text: "First late (09/2000)" },
+      { id: "BNR34-404495", text: "Last V-Spec II (08/29/02)" },
+      { id: "BNR34-404483", text: "Last M-Spec (08/28/02)" }
+    ]
   },
   ES: {
     title: "INTERVALOS DE NÚMEROS DE CHASIS",
@@ -29,17 +43,31 @@ const tChassis = {
     variant: "Variante",
     start: "Inicio",
     end: "Fin",
-    count: "Cantidad"
+    count: "Cantidad",
+    notes: [
+      { id: "BNR34-000001", text: "Primer chasis de producción" },
+      { id: "BNR34-007131", text: "Último de la primera fase (07/2000)" },
+      { id: "BNR34-400001", text: "Primero de la segunda fase (09/2000)" },
+      { id: "BNR34-404495", text: "Último V-Spec II (29/08/02)" },
+      { id: "BNR34-404483", text: "Último M-Spec (28/08/02)" }
+    ]
   },
   JA: {
     title: "シャシー番号の範囲",
-    desc: "R34で知られているVINシーケンスの範囲。これらを使用して、シャシー番号から車両의シリーズとバリエーションを特定します。",
+    desc: "R34で知られているVINシーケンスの範囲。これらを使用して、シャシー番号から車両のシリーズとバリエーションを特定します。",
     prefix: "プレフィックス",
     series: "シリーズ",
     variant: "バリエーション",
     start: "開始",
     end: "終了",
-    count: "台数"
+    count: "台数",
+    notes: [
+      { id: "BNR34-000001", text: "最初の生産シャシー" },
+      { id: "BNR34-007131", text: "最後の前期型 (2000/07)" },
+      { id: "BNR34-400001", text: "最初の後期型 (2000/09)" },
+      { id: "BNR34-404495", text: "最後の V-Spec II (2002/08/29)" },
+      { id: "BNR34-404483", text: "最後の M-Spec (2002/08/28)" }
+    ]
   }
 };
 
@@ -124,6 +152,15 @@ export default function ChassisRanges({ lang = 'PT' }) {
               </tr>
             </tbody>
           </table>
+        </div>
+        <div className="mt-8">
+          <ul style={{ textAlign: "left" }} className="list-disc pl-5 text-sm text-muted-foreground space-y-2">
+            {t.notes.map((note, idx) => (
+              <li key={idx}>
+                <span className="font-mono font-bold text-foreground">{note.id}</span> – {note.text}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

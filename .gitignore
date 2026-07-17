@@ -22,3 +22,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ─── Arquivos pesados / gerados (não subir pro GitHub) ───────────────────────
+# Pasta com 11GB de fotos originais dos carros
+public/pastas_r34/
+pastas_r34/
+
+# Thumbnails gerados automaticamente pelo script
+public/chassis_thumbs/
+
+# JSON gerado pelo script (recriado localmente)
+public/cars.json
+
+# Planilha de dados (substituída pelo banco MySQL)
+DADOS.xlsx
+
+# ─── Arquivos sensíveis da API / Banco de Dados ──────────────────────────────
+# Credenciais do banco de dados
+api/db.php
+
+# Dump SQL completo (contém todos os dados – subir separado na Hostinger)
+api/bnr34_export.sql
+
+# Script de migração (executado apenas uma vez)
+api/migrate.php
