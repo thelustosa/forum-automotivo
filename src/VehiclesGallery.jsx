@@ -56,6 +56,7 @@ export default function VehiclesGallery({ lang = 'PT' }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedCarLoading, setSelectedCarLoading] = useState(false);
   const ITEMS_PER_PAGE = 30;
 
   const t = tGallery[lang] || tGallery.PT;
@@ -98,6 +99,15 @@ export default function VehiclesGallery({ lang = 'PT' }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  if (selectedCarLoading) {
+    return (
+      <div style={{ padding: '4rem', textAlign: 'center', color: '#a1a1aa' }}>
+        <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Carregando detalhes do veículo...</div>
+        <div style={{ opacity: 0.6 }}>Isso pode levar alguns segundos dependendo da sua conexão.</div>
+      </div>
+    );
+  }
+
   if (selectedCar) {
     return <VehicleDetail car={selectedCar} lang={lang} onBack={() => setSelectedCar(null)} />;
   }
@@ -122,11 +132,18 @@ export default function VehiclesGallery({ lang = 'PT' }) {
               key={index} 
               className="car-card cursor-pointer" 
               onClick={() => {
+                setSelectedCarLoading(true);
                 // Busca detalhes completos antes de abrir a tela
                 fetch(`/api/cars.php?chassi=${car.chassi}`)
                   .then(r => r.json())
-                  .then(full => setSelectedCar(full))
-                  .catch(() => setSelectedCar(car));
+                  .then(full => {
+                    setSelectedCar(full);
+                    setSelectedCarLoading(false);
+                  })
+                  .catch(() => {
+                    setSelectedCar(car);
+                    setSelectedCarLoading(false);
+                  });
               }}
               style={{ cursor: 'pointer' }}
             >
