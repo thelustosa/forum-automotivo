@@ -85,10 +85,6 @@ export default function VehiclesGallery({ lang = 'PT' }) {
     loadCars(currentPage, searchTerm);
   }, [currentPage, searchTerm]);
 
-  if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: '#a1a1aa' }}>{t.loading}</div>;
-  }
-
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
@@ -126,8 +122,11 @@ export default function VehiclesGallery({ lang = 'PT' }) {
           />
         </div>
 
-        <div className="gallery-grid">
-          {cars.map((car, index) => (
+        {loading ? (
+          <div style={{ padding: '2rem', textAlign: 'center', color: '#a1a1aa' }}>{t.loading}</div>
+        ) : (
+          <div className="gallery-grid">
+            {cars.map((car, index) => (
             <div 
               key={index} 
               className="car-card cursor-pointer" 
@@ -168,7 +167,7 @@ export default function VehiclesGallery({ lang = 'PT' }) {
             </div>
           ))}
         </div>
-
+        )}
         {cars.length === 0 && !loading && (
           <div className="no-results">
             {t.noResults} "{searchTerm}"
