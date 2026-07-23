@@ -10,7 +10,9 @@ const tDetail = {
     color: "Cor",
     year: "Ano",
     production: "Nº de Produção",
-    loadMore: "Carregar mais fotos"
+    loadMore: "Carregar mais fotos",
+    contactTitle: "Contato",
+    contactDesc: "Tem informações sobre este veículo ou notou algum erro? Entre em contato:"
   },
   EN: {
     back: "← Back to Gallery",
@@ -20,7 +22,9 @@ const tDetail = {
     color: "Color",
     year: "Year",
     production: "Production No.",
-    loadMore: "Load more photos"
+    loadMore: "Load more photos",
+    contactTitle: "Contact",
+    contactDesc: "Do you have info about this vehicle or noticed an error? Contact us:"
   },
   ES: {
     back: "← Volver a la Galería",
@@ -30,7 +34,9 @@ const tDetail = {
     color: "Color",
     year: "Año",
     production: "Nº de Producción",
-    loadMore: "Cargar más fotos"
+    loadMore: "Cargar más fotos",
+    contactTitle: "Contacto",
+    contactDesc: "¿Tiene información sobre este vehículo o notó algún error? Contáctenos:"
   },
   JA: {
     back: "← ギャラリーに戻る",
@@ -40,7 +46,9 @@ const tDetail = {
     color: "カラー",
     year: "年式",
     production: "製造番号",
-    loadMore: "もっと写真を読み込む"
+    loadMore: "もっと写真を読み込む",
+    contactTitle: "お問い合わせ",
+    contactDesc: "この車両に関する情報がある場合、またはエラーに気付いた場合は、お問い合わせください："
   }
 };
 
@@ -169,6 +177,18 @@ export default function VehicleDetail({ car, lang = 'PT', onBack }) {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="listing-card" style={{ marginTop: '1.5rem' }}>
+              <h3 className="listing-title">{t.contactTitle}</h3>
+              <p style={{ color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.5', marginTop: '0.5rem' }}>
+                {t.contactDesc}
+              </p>
+              <div style={{ marginTop: '1rem', fontWeight: 'bold' }}>
+                <a href="mailto:contato@thebnr34.com" style={{ color: '#dc2626', textDecoration: 'none' }}>
+                  contato@thebnr34.com
+                </a>
+              </div>
             </div>
           </div>
 
